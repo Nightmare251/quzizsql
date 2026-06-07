@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kuis Bahasa Indonesia Kelas X — SAS Genap 2026</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --color-bg: #ffffff;
+    --color-bg-secondary: #f5f5f0;
+    --color-bg-tertiary: #ededea;
+    --color-text-primary: #1a1a18;
+    --color-text-secondary: #5f5e5a;
+    --color-text-tertiary: #888780;
+    --color-border: rgba(0,0,0,0.12);
+    --color-border-md: rgba(0,0,0,0.22);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --purple-50: #EEEDFE;
+    --purple-200: #AFA9EC;
+    --purple-600: #534AB7;
+    --purple-800: #3C3489;
+    --teal-50: #E1F5EE;
+    --teal-400: #1D9E75;
+    --teal-600: #0F6E56;
+    --teal-800: #085041;
+    --coral-50: #FAECE7;
+    --coral-400: #D85A30;
+    --coral-600: #993C1D;
+    --coral-800: #4A1B0C;
+    --amber-50: #FAEEDA;
+    --amber-600: #854F0B;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: #1c1c1a;
+      --color-bg-secondary: #282825;
+      --color-bg-tertiary: #323230;
+      --color-text-primary: #f0ede8;
+      --color-text-secondary: #b4b2a9;
+      --color-text-tertiary: #888780;
+      --color-border: rgba(255,255,255,0.1);
+      --color-border-md: rgba(255,255,255,0.2);
+      --purple-50: #26215C;
+      --purple-600: #7F77DD;
+      --purple-800: #AFA9EC;
+      --teal-50: #04342C;
+      --teal-600: #5DCAA5;
+      --teal-800: #9FE1CB;
+      --coral-50: #4A1B0C;
+      --coral-600: #F0997B;
+      --coral-800: #F5C4B3;
+      --amber-50: #412402;
+      --amber-600: #FAC775;
+    }
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 680px;
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+    border: 0.5px solid var(--color-border);
+    padding: 1.75rem 2rem;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .header-title { font-size: 15px; font-weight: 500; }
+  .header-sub { font-size: 13px; color: var(--color-text-secondary); margin-top: 2px; }
+
+  .streak-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--amber-50);
+    border-radius: 99px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--amber-600);
+    font-weight: 500;
+  }
+
+  .progress-wrap {
+    width: 100%;
+    height: 6px;
+    background: var(--color-bg-secondary);
+    border-radius: 99px;
+    margin-bottom: 1.25rem;
+  }
+  .progress-bar {
+    height: 6px;
+    border-radius: 99px;
+    background: var(--purple-600);
+    transition: width 0.4s ease;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+  .stat-card {
+    flex: 1;
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-md);
+    padding: 0.75rem;
+    text-align: center;
+  }
+  .stat-val { font-size: 20px; font-weight: 500; }
+  .stat-lbl { font-size: 11px; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.04em; }
+
+  .question-num {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .question-text {
+    font-size: 15px;
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    border: 0.5px solid var(--color-border);
+    white-space: pre-line;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+  @media (max-width: 520px) {
+    .options-grid { grid-template-columns: 1fr; }
+  }
+
+  .opt-btn {
+    background: var(--color-bg);
+    border: 1.5px solid var(--color-border-md);
+    border-radius: var(--radius-lg);
+    padding: 0.85rem 1rem;
+    font-size: 14px;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    text-align: left;
+    line-height: 1.45;
+    transition: border-color 0.15s, background 0.15s, transform 0.1s;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: inherit;
+  }
+  .opt-btn:not(:disabled):hover {
+    border-color: var(--purple-600);
+    background: var(--purple-50);
+    color: var(--purple-800);
+    transform: translateY(-1px);
+  }
+  .opt-label {
+    font-weight: 600;
+    font-size: 13px;
+    min-width: 20px;
+    color: var(--color-text-tertiary);
+    flex-shrink: 0;
+  }
+  .opt-btn.correct {
+    border-color: var(--teal-600);
+    background: var(--teal-50);
+    color: var(--teal-800);
+  }
+  .opt-btn.correct .opt-label { color: var(--teal-600); }
+  .opt-btn.wrong {
+    border-color: var(--coral-600);
+    background: var(--coral-50);
+    color: var(--coral-800);
+  }
+  .opt-btn.wrong .opt-label { color: var(--coral-600); }
+  .opt-btn.dim { opacity: 0.4; cursor: default; }
+
+  .feedback-box {
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+    font-size: 14px;
+    line-height: 1.6;
+    display: none;
+  }
+  .feedback-box.correct {
+    background: var(--teal-50);
+    border: 0.5px solid var(--teal-400);
+    color: var(--teal-800);
+  }
+  .feedback-box.wrong {
+    background: var(--coral-50);
+    border: 0.5px solid var(--coral-400);
+    color: var(--coral-800);
+  }
+  .feedback-icon { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+
+  .next-btn {
+    display: none;
+    width: 100%;
+    padding: 0.85rem;
+    background: var(--purple-600);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    font-family: inherit;
+  }
+  .next-btn:hover { background: var(--purple-800); transform: translateY(-1px); }
+  .next-btn:active { transform: scale(0.98); }
+
+  /* Score screen */
+  .score-screen {
+    text-align: center;
+    padding: 2rem 1rem;
+    display: none;
+  }
+  .score-circle {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: var(--purple-50);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    border: 3px solid var(--purple-600);
+  }
+  .score-num { font-size: 38px; font-weight: 600; color: var(--purple-600); line-height: 1; }
+  .score-pct { font-size: 13px; color: var(--purple-600); }
+  .score-title { font-size: 20px; font-weight: 500; margin-bottom: 0.5rem; }
+  .score-desc { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 1.5rem; line-height: 1.6; }
+  .score-detail {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 1.5rem;
+  }
+  .score-detail span {
+    font-size: 14px;
+    padding: 6px 16px;
+    border-radius: 99px;
+  }
+  .score-detail .s-benar { background: var(--teal-50); color: var(--teal-800); }
+  .score-detail .s-salah { background: var(--coral-50); color: var(--coral-800); }
+  .restart-btn {
+    padding: 0.85rem 2.5rem;
+    background: var(--purple-600);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-family: inherit;
+  }
+  .restart-btn:hover { background: var(--purple-800); }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div>
+      <div class="header-title">Kuis Bahasa Indonesia Kelas X</div>
+      <div class="header-sub">Teks Biografi &amp; Puisi — SAS Genap 2026</div>
+    </div>
+    <div class="streak-badge" id="streak-badge">
+      <i class="ti ti-flame"></i> <span id="streak-count">0</span> streak
+    </div>
+  </div>
+
+  <div class="progress-wrap"><div class="progress-bar" id="prog-bar" style="width:0%"></div></div>
+
+  <div class="stats-row" id="stats-row">
+    <div class="stat-card"><div class="stat-val" id="stat-soal">1</div><div class="stat-lbl">Soal</div></div>
+    <div class="stat-card"><div class="stat-val" id="stat-benar" style="color:var(--teal-600)">0</div><div class="stat-lbl">Benar</div></div>
+    <div class="stat-card"><div class="stat-val" id="stat-salah" style="color:var(--coral-600)">0</div><div class="stat-lbl">Salah</div></div>
+  </div>
+
+  <div id="q-num" class="question-num"></div>
+  <div id="q-text" class="question-text"></div>
+  <div id="opts" class="options-grid"></div>
+  <div id="feedback" class="feedback-box"></div>
+  <button id="next-btn" class="next-btn" onclick="nextQ()">Lanjut ke soal berikutnya →</button>
+  <div id="score-screen" class="score-screen"></div>
+</div>
+
+<script>
+const ALL_QUESTIONS = [
+  {
+    q: "Teks biografi memiliki ciri khas tersendiri. Adapun salah satu ciri dari teks biografi adalah ...",
+    a: "Menceritakan kehidupan nyata seorang tokoh secara kronologis berdasarkan fakta",
+    wrong: ["Menggunakan bahasa kiasan dan penuh imajinasi penulis","Berisi cerita rekaan yang terinspirasi dari tokoh nyata","Ditulis dalam bentuk puisi atau syair"],
+    explain: "Teks biografi berisi kisah hidup nyata, bersifat faktual, disajikan kronologis, dan menggunakan kata ganti orang ketiga."
+  },
+  {
+    q: "Unsur-unsur berikut ini yang tidak perlu ada dalam buku biografi adalah ...",
+    a: "Karangan fiksi atau cerita imajinatif tentang tokoh",
+    wrong: ["Identitas dan latar belakang tokoh","Perjalanan hidup dan prestasi tokoh","Pengaruh dan kontribusi tokoh bagi masyarakat"],
+    explain: "Biografi bersifat faktual, sehingga unsur fiksi/rekaan tidak perlu ada."
+  },
+  {
+    q: "Dr. Susiani Purbaningsih, DEA lahir di Gunung Kidul, 28 Februari 1961. Susiani menempuh pendidikan S-3 di Universitas Montpellier II Prancis. Istri dari M. Syamsa Ardisasmita ini aktif menyumbangkan keahlian budi daya anggrek kepada para petani.\n\nKutipan biografi tersebut menonjolkan unsur ...",
+    a: "Keahlian/profesi dan pengabdian tokoh kepada masyarakat",
+    wrong: ["Latar belakang keluarga dan kehidupan pribadi","Pendidikan formal tokoh di luar negeri","Perjuangan tokoh menghadapi kesulitan hidup"],
+    explain: "Kutipan menonjolkan keahlian budi daya anggrek dan pengabdian kepada petani."
+  },
+  {
+    q: "Puisi 'Pahlawan Tak Dikenal' bait pertama:\n'Sepuluh tahun yang lalu, dia terbaring\nTetapi bukan tidur, sayang\nSebuah lubang peluru bundar di dadanya\nSenyum bekunya berkata, kita sedang perang'\n\nRima bait pertama adalah ...",
+    a: "a-b-a-b",
+    wrong: ["a-a-b-b","a-b-b-a","a-a-a-a"],
+    explain: "terbaring(a)-sayang(b)-dadanya(a)-perang(b) → pola a-b-a-b."
+  },
+  {
+    q: "Sang politikus akhirnya melakukan kritik tajam kepada pemerintah yang otoriter tersebut.\n\nKata kerja verba aktif transitif yang terdapat pada kutipan di atas yaitu ...",
+    a: "melakukan",
+    wrong: ["otoriter","tajam","pemerintah"],
+    explain: "'melakukan' berawalan me- dan membutuhkan objek (kritik tajam), sehingga termasuk verba aktif transitif."
+  },
+  {
+    q: "Dalam sehari, Aan mesti menyelesaikan satu halaman. Aan mengaku menyelesaikan satu halaman per hari bukan pekerjaan berat karena naskah yang ditulis oleh Mark Powers, konsep gambar yang harus dibuatnya cukup rinci.\n\nKata kerja yang terdapat dalam kutipan tersebut berjumlah ...",
+    a: "5 kata kerja",
+    wrong: ["3 kata kerja","4 kata kerja","6 kata kerja"],
+    explain: "5 kata kerja: menyelesaikan (2x), mengaku, ditulis, dibuatnya."
+  },
+  {
+    q: "Pemilik Traveloka tersebut tidak cepat putus asa dan terus bekerja keras mengembangkan bisnisnya. Lambat laun Traveloka mulai berkembang dan banyak maskapai yang mau bekerja sama.\n\nHal yang dapat diteladani dari tokoh tersebut adalah ...",
+    a: "Pantang menyerah, tekun, dan gigih dalam bekerja keras mengembangkan usaha",
+    wrong: ["Cerdas dalam strategi pemasaran digital","Berani mengambil risiko finansial besar","Pintar memilih mitra bisnis yang tepat"],
+    explain: "Tokoh menunjukkan sifat tidak mudah putus asa dan terus bekerja keras."
+  },
+  {
+    q: "Biografi dapat mengisahkan tentang kehidupan seorang tokoh penting atau terkenal maupun tidak terkenal. Namun kebanyakan biografi bercerita tentang ...",
+    a: "Tokoh-tokoh penting, terkenal, atau berpengaruh dalam berbagai bidang kehidupan",
+    wrong: ["Tokoh-tokoh biasa yang memiliki kehidupan unik","Pahlawan nasional yang gugur dalam perang","Ilmuwan yang menemukan teknologi baru"],
+    explain: "Umumnya biografi ditulis tentang orang yang memiliki pengaruh besar atau prestasi di bidangnya."
+  },
+  {
+    q: "Biografi yang hanya menjelaskan tentang fakta-fakta dari kehidupan seseorang serta peran pentingnya disebut ...",
+    a: "Biografi singkat (biografi populer)",
+    wrong: ["Autobiografi","Biografi intelektual","Biografi jurnalistik"],
+    explain: "Biografi singkat/populer hanya memuat fakta penting tanpa ulasan mendalam."
+  },
+  {
+    q: "Berikut hal-hal yang dapat diteladani dari tokoh dalam teks biografi, kecuali ...",
+    a: "Sifat sombong, egois, atau tindakan negatif tokoh",
+    wrong: ["Semangat belajar yang tinggi","Kejujuran dan kedisiplinan","Kepedulian sosial terhadap sesama"],
+    explain: "Yang TIDAK diteladani adalah perilaku atau sifat negatif tokoh."
+  },
+  {
+    q: "Pada teks biografi terdapat beberapa pola penyajian, antara lain ...",
+    a: "Pola kronologis (urutan waktu) dan pola tematis (berdasarkan tema/aspek kehidupan)",
+    wrong: ["Pola naratif dan pola deskriptif","Pola argumentatif dan pola persuasif","Pola eksposisi dan pola ilustrasi"],
+    explain: "Teks biografi disajikan secara kronologis (urutan waktu) atau tematis (berdasarkan aspek kehidupan)."
+  },
+  {
+    q: "Ciri-ciri syair:\ni. Bersajak a-a-a-a\nii. Isi semua, tidak ada sampiran\niii. Berasal dari Melayu (Indonesia)\niv. Setiap bait terdiri dari 2 baris\n\nManakah yang termasuk ciri-ciri syair?",
+    a: "i, ii, dan iii (bersajak a-a-a-a, isi semua, berasal dari Melayu)",
+    wrong: ["i, ii, iii, dan iv (semua ciri di atas)","ii, iii, dan iv","i dan iv saja"],
+    explain: "Syair bersajak a-a-a-a, isi semua, dari Melayu, dan setiap bait 4 baris (bukan 2). Ciri iv salah."
+  },
+  {
+    q: "Bagian reorientasi pada teks biografi adalah ...",
+    a: "Paragraf penutup yang berisi simpulan, kesan, atau pandangan penulis tentang tokoh",
+    wrong: ["Paragraf pembuka yang memperkenalkan tokoh","Paragraf yang menceritakan peristiwa penting","Paragraf yang menjelaskan latar belakang keluarga"],
+    explain: "Reorientasi adalah bagian penutup teks biografi berisi simpulan atau refleksi penulis."
+  },
+  {
+    q: "Ia dikenal sebagai Sang Jenius dari Papua. Ia lahir di Manokwari pada tanggal 22 September 1986. Dia adalah pemenang lomba First Step to Nobel Prize in Physics tahun 2004. Rumus yang ditemukannya diberi nama 'George Saa Formula'.\n\nKutipan tersebut adalah bagian struktur biografi ...",
+    a: "Orientasi",
+    wrong: ["Reorientasi","Rangkaian peristiwa","Komplikasi"],
+    explain: "Kutipan ini merupakan pengenalan awal tokoh (nama, lahir, prestasi) → bagian Orientasi."
+  },
+  {
+    q: "William Henry Gates III dilahirkan pada 28 Oktober 1955, di Seattle. Ia adalah anak ke dua dari tiga bersaudara. Ayahnya seorang pengacara, ibunya pegawai First Interstate Bank.\n\nTeks tersebut mempunyai kekurangan sebagai teks biografi karena ...",
+    a: "Tidak memuat prestasi, karya, atau kontribusi penting tokoh (Bill Gates) terhadap dunia",
+    wrong: ["Tidak menyebutkan tempat lahir tokoh","Tidak menggunakan kata ganti orang ketiga","Penulisannya tidak kronologis"],
+    explain: "Teks hanya berisi identitas dasar, tidak ada pencapaian atau kontribusi Bill Gates."
+  },
+  {
+    q: "Raden Ajeng Kartini lahir 21 April 1879. Saat itu, adat istiadat masih kukuh dipegang masyarakat Jawa. Satu hal yang diwariskan dari keluarganya adalah pendidikan.\n\nKutipan biografi R.A. Kartini tersebut termasuk bagian ...",
+    a: "Orientasi",
+    wrong: ["Reorientasi","Rangkaian peristiwa","Komplikasi/konflik"],
+    explain: "Berisi pengenalan tokoh: nama, tanggal lahir, dan konteks sosial → bagian Orientasi."
+  },
+  {
+    q: "Bahasa yang digunakan dalam puisi cenderung bermakna ...",
+    a: "Konotatif (makna kias/tidak sebenarnya) dan padat makna",
+    wrong: ["Denotatif (makna sebenarnya) dan lugas","Ilmiah dan sistematis","Formal dan baku sesuai PUEBI"],
+    explain: "Puisi menggunakan bahasa konotatif, kaya kiasan dan simbol, tidak selalu bermakna harfiah."
+  },
+  {
+    q: "'Dua puluh tiga matahari; Bangkit dari pundakmu; tubuhmu menguapkan bau tanah' (W.S. Rendra)\n\nImaji atau citraan yang dominan dalam puisi tersebut adalah ...",
+    a: "Citraan penciuman (olfaktori) – ditandai oleh kata 'menguapkan bau tanah'",
+    wrong: ["Citraan penglihatan (visual)","Citraan perabaan (taktil)","Citraan pendengaran (auditif)"],
+    explain: "'Menguapkan bau tanah' melibatkan indera penciuman → citraan olfaktori dominan."
+  },
+  {
+    q: "'Cintaku jauh di pulau.\nAmboi! Jalan sudah bertahun kutempuh!\nPerahu yang bersama kan merapuh!' (Chairil Anwar)\n\nMakna 'perahu' pada kutipan puisi di atas adalah ...",
+    a: "Tubuh / kehidupan manusia (wadah yang membawa seseorang mengarungi kehidupan)",
+    wrong: ["Kendaraan air untuk berlayar","Harapan yang belum tercapai","Cinta yang kandas di tengah jalan"],
+    explain: "'Perahu yang kan merapuh' adalah metafora untuk tubuh/hidup yang akan hancur (mati)."
+  },
+  {
+    q: "Puisi 'Pahlawan Tak Dikenal' (Toto Sudarto Bachtiar):\n'Sepuluh tahun yang lalu, dia terbaring\nTetapi bukan tidur, sayang\nSebuah lubang peluru bundar di dadanya'\n\nPuisi di atas menuturkan tentang ...",
+    a: "Seorang pejuang/pahlawan yang gugur di medan perang tanpa dikenal namanya",
+    wrong: ["Seorang prajurit yang tertidur kelelahan setelah perang","Korban kecelakaan yang tidak diketahui identitasnya","Seorang pemimpin perang yang terkenal"],
+    explain: "Puisi mengisahkan prajurit yang terbaring meninggal (bukan tidur) dengan lubang peluru di dada."
+  },
+  {
+    q: "Febri Hariyadi (Bow) adalah penyerang andalan Timnas. Ia menekuni sepak bola sedari muda. Ia bukan lahir dari keluarga yang berkecukupan. Berkat kegigihannya, beliau menjadi tulang punggung Timnas.\n\nTema yang dikisahkan pada biografi di atas adalah ...",
+    a: "Perjuangan dan kegigihan seorang atlet sepak bola dari keterbatasan menuju kesuksesan",
+    wrong: ["Kehidupan mewah seorang atlet profesional","Persaingan antar pemain sepak bola nasional","Teknik dan strategi bermain sepak bola"],
+    explain: "Temanya adalah perjuangan dari keterbatasan ekonomi menuju keberhasilan sebagai atlet."
+  },
+  {
+    q: "Gatot Subroto dikenal sebagai anak pemberani. Pada tahun 1923 mengikuti pendidikan militer menjadi KNIL. Gatot Subroto selalu membela rakyat kecil dan menyumbangkan sebagian gajinya.\n\nArti istilah 'pribumi' adalah ...",
+    a: "Penduduk asli (orang yang berasal dari daerah/negeri itu sendiri, bukan pendatang)",
+    wrong: ["Tentara yang bertugas di daerah pedalaman","Warga negara yang memiliki hak istimewa","Orang yang lahir di lingkungan bangsawan"],
+    explain: "Pribumi berarti penduduk asli suatu negeri, bukan pendatang/penjajah."
+  },
+  {
+    q: "Ardian Syaf seorang komikus yang rendah hati, memilih tinggal di kampung halamannya yaitu Desa Tenggur, Kecamatan Rejotangan, Tulung Agung, bersama istri dan seorang anaknya.\n\nKalimat pertanyaan yang sesuai dengan kutipan tersebut adalah ...",
+    a: "Di mana Ardian Syaf memilih tinggal bersama keluarganya?",
+    wrong: ["Apa pekerjaan Ardian Syaf sehari-hari?","Berapa jumlah anak yang dimiliki Ardian Syaf?","Bagaimana karakter Ardian Syaf sebagai komikus?"],
+    explain: "Kutipan menjelaskan tempat tinggal Ardian Syaf → pertanyaan yang tepat tentang lokasi."
+  },
+  {
+    q: "'Kulihat Burung itu bergoyang, menikmati semilir angin yang riang'\n\n'Kulihat' dalam larik puisi di atas termasuk sebagai citraan ...",
+    a: "Citraan penglihatan (visual)",
+    wrong: ["Citraan pendengaran (auditif)","Citraan perasaan (emosional)","Citraan gerak (kinestetik)"],
+    explain: "'Kulihat' berasal dari 'lihat' → indera mata → citraan penglihatan (visual)."
+  },
+  {
+    q: "Febri Hariyadi bukan lahir dari keluarga yang berkecukupan. [.........], berkat kegigihannya dalam berlatih, sekarang beliau menjadi tulang punggung Timnas.\n\nKata hubung (konjungsi) yang tepat untuk melengkapi kalimat tersebut adalah ...",
+    a: "Namun / Akan tetapi / Meskipun demikian",
+    wrong: ["Oleh karena itu / Sehingga","Dan / Serta","Kemudian / Lalu"],
+    explain: "Hubungan pertentangan antara keterbatasan dan keberhasilan → konjungsi 'Namun'/'Akan tetapi'."
+  },
+  {
+    q: "Tahap pengenalan tokoh pada teks biografi yang berisi gambaran awal tentang tokoh tersebut disebut ...",
+    a: "Orientasi",
+    wrong: ["Reorientasi","Komplikasi","Eksposisi"],
+    explain: "Struktur biografi: Orientasi (pengenalan awal) → Peristiwa → Reorientasi (penutup)."
+  },
+  {
+    q: "Berikut ini yang merupakan contoh kata kerja pasif adalah ...",
+    a: "Ditulis, dibaca, diberikan (kata kerja berawalan di- atau ter-)",
+    wrong: ["Menulis, membaca, memberikan","Tulisan, bacaan, pemberian","Tertulis hanya untuk kata ter-"],
+    explain: "Kata kerja pasif ditandai awalan di- atau ter-: ditulis, dibaca, diberikan."
+  },
+  {
+    q: "Berikut ini yang termasuk jenis biografi berdasarkan sisi penulisnya adalah ...",
+    a: "Autobiografi (ditulis sendiri oleh tokoh) dan Biografi (ditulis oleh orang lain)",
+    wrong: ["Biografi singkat dan biografi panjang","Biografi intelektual dan biografi politik","Biografi fiksi dan biografi nonfiksi"],
+    explain: "Berdasarkan penulisnya: autobiografi (oleh tokoh sendiri) dan biografi (oleh orang lain)."
+  },
+  {
+    q: "Bungaku kini bersemi kembali\nsetelah seminggu terkurung di lembah sunyi\nkini bertunas lagi daunnya yang dulu menguning dan ...........\nrantingnya yang dulu kering\n\nDiksi yang tepat untuk melengkapi larik puisi tersebut adalah ...",
+    a: "layu / gugur / meranggas",
+    wrong: ["mekar / bersemi","hijau / segar","tumbuh / berkembang"],
+    explain: "Daun yang menguning lazimnya kemudian layu/gugur, sesuai makna dan konteks puisi."
+  },
+  {
+    q: "Kutipan biografi Achmad Zaky:\n'Pada tahun 1997, ia mulai mengenal pemrograman komputer. Kecerdasannya membawanya diterima di ITB tahun 2004, jurusan Teknik Informatika, dengan IP 4.00 pada semester satu.'\n\nKutipan tersebut merupakan unsur biografi yaitu ...",
+    a: "Perjalanan pendidikan dan prestasi akademik tokoh",
+    wrong: ["Latar belakang keluarga tokoh","Pengabdian tokoh kepada masyarakat","Reorientasi / simpulan tentang tokoh"],
+    explain: "Kutipan memuat perjalanan pendidikan (ITB, Teknik Informatika) dan prestasi (IP 4.00) Achmad Zaky."
+  },
+  {
+    q: "Semasa kecil, Gatot Subroto dikenal sebagai anak pemberani. Pada tahun 1923, ia mengikuti pendidikan militer KNIL. Gatot Subroto selalu membela rakyat kecil dan menyumbangkan sebagian gajinya.\n\nIsi teks tersebut adalah ...",
+    a: "Perjalanan hidup Gatot Subroto sebagai anak pemberani yang membela rakyat dan bergabung dengan militer",
+    wrong: ["Perjuangan Gatot Subroto melawan penjajah Belanda secara langsung","Latar belakang keluarga dan pendidikan Gatot Subroto","Prestasi militer Gatot Subroto di tingkat nasional"],
+    explain: "Teks menceritakan karakter pemberani Gatot Subroto dan kiprah militernya serta kepedulian rakyat."
+  },
+  {
+    q: "Bung Hatta sangat aktif melaksanakan tugasnya sebagai bendahara di Jong Sumatranen Bond. Ia juga memikirkan penderitaan rakyat akibat penjajahan.\n\nHal yang dapat diteladani dari kutipan biografi Bung Hatta adalah ...",
+    a: "Aktif berorganisasi, bertanggung jawab dalam menjalankan tugas, dan peduli terhadap penderitaan rakyat",
+    wrong: ["Keberanian melawan penjajah secara fisik","Kecerdasan dalam bidang ekonomi dan keuangan","Kemampuan berpidato dan memimpin massa"],
+    explain: "Keteladanan Bung Hatta: aktif berorganisasi, bertanggung jawab sebagai bendahara, peduli rakyat."
+  },
+  {
+    q: "'Selain itu, Chairil Anwar juga menerjemahkan karya sastra asing ke dalam bahasa Indonesia.'\n\nUnsur kebahasaan dari kata 'menerjemahkan' adalah ...",
+    a: "Kata kerja (verba) aktif transitif berawalan me-",
+    wrong: ["Kata kerja pasif berawalan di-","Kata benda (nomina) abstrak","Kata sifat (adjektiva) deskriptif"],
+    explain: "'Menerjemahkan' adalah verba aktif (me-) transitif karena memerlukan objek (karya sastra asing)."
+  },
+  {
+    q: "'Wahai sahabat\nUntuk selamanya\nKita percaya\nTebarkan arah jangan pernah lelah\nUntukmu sahabat'\n\nTema puisi tersebut adalah ...",
+    a: "Persahabatan / kesetiaan dan semangat dalam persahabatan",
+    wrong: ["Perjuangan melawan musuh bersama","Kerinduan kepada orang yang dicintai","Semangat nasionalisme pemuda"],
+    explain: "Kata 'sahabat' berulang dengan pesan kesetiaan dan semangat → tema persahabatan."
+  },
+  {
+    q: "Dengan adanya biografi, kita dapat menemukan hubungan sebuah misteri yang melingkupi hidup seseorang dan penjelasan mengenai tindakan dalam hidupnya. Biografi adalah ...",
+    a: "Tulisan yang mengisahkan riwayat hidup seseorang secara nyata/faktual, yang ditulis oleh orang lain",
+    wrong: ["Tulisan yang dibuat sendiri oleh tokoh tentang hidupnya","Karya fiksi yang terinspirasi dari kehidupan nyata","Kumpulan puisi tentang perjalanan hidup seseorang"],
+    explain: "Biografi adalah tulisan faktual tentang kehidupan seseorang yang ditulis oleh orang lain."
+  },
+  {
+    q: "Unsur-unsur keindahan yang digunakan dalam puisi adalah ...",
+    a: "Diksi (pilihan kata), irama/ritme, rima, majas/gaya bahasa, dan citraan/imaji",
+    wrong: ["Alur, penokohan, dan latar","Tema, amanat, dan sudut pandang","Kata baku, ejaan, dan tanda baca"],
+    explain: "Unsur keindahan puisi: diksi, rima, irama, majas, dan citraan."
+  },
+  {
+    q: "Kartini ingin terus melanjutkan sekolah ke jenjang yang lebih tinggi, [.........], ayahnya tidak memberikan izin Kartini melanjutkan sekolah.\n\nKonjungsi yang tepat untuk bagian rumpang tersebut adalah ...",
+    a: "namun / akan tetapi / sayangnya",
+    wrong: ["oleh karena itu / maka","kemudian / setelah itu","bahkan / apalagi"],
+    explain: "Hubungan pertentangan antara keinginan dan larangan → konjungsi 'namun'/'akan tetapi'."
+  },
+  {
+    q: "Hal yang harus dihindari dalam menulis teks biografi adalah ...",
+    a: "Menambahkan fakta palsu, opini subjektif tanpa dasar, atau informasi yang tidak dapat diverifikasi tentang tokoh",
+    wrong: ["Menyebutkan prestasi dan kontribusi tokoh","Menggunakan kata ganti orang ketiga","Menyajikan peristiwa secara kronologis"],
+    explain: "Biografi harus faktual dan objektif; fakta palsu atau opini tanpa dasar harus dihindari."
+  }
+];
+
+const LABELS = ['A','B','C','D'];
+let questions = [], current = 0, score = 0, wrong = 0, streak = 0, answered = false;
+
+function shuffle(arr) {
+  let a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startQuiz() {
+  questions = shuffle(ALL_QUESTIONS).map(q => ({ ...q, opts: shuffle([q.a, ...q.wrong]) }));
+  current = 0; score = 0; wrong = 0; streak = 0;
+  document.getElementById('score-screen').style.display = 'none';
+  ['q-num','q-text','opts','stats-row','streak-badge'].forEach(id => {
+    document.getElementById(id).style.display = id === 'opts' ? 'grid' : '';
+  });
+  showQ();
+}
+
+function showQ() {
+  const q = questions[current];
+  answered = false;
+  const total = questions.length;
+  document.getElementById('prog-bar').style.width = (current / total * 100) + '%';
+  document.getElementById('q-num').textContent = 'Soal ' + (current + 1) + ' dari ' + total;
+  document.getElementById('stat-soal').textContent = current + 1;
+  document.getElementById('stat-benar').textContent = score;
+  document.getElementById('stat-salah').textContent = wrong;
+  document.getElementById('streak-count').textContent = streak;
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('feedback').style.display = 'none';
+  document.getElementById('next-btn').style.display = 'none';
+  const opts = document.getElementById('opts');
+  opts.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = '<span class="opt-label">' + LABELS[i] + '</span><span>' + opt + '</span>';
+    btn.onclick = () => pick(opt, btn, q);
+    opts.appendChild(btn);
+  });
+}
+
+function pick(chosen, btn, q) {
+  if (answered) return;
+  answered = true;
+  const isCorrect = chosen === q.a;
+  document.getElementById('opts').querySelectorAll('.opt-btn').forEach(b => {
+    b.disabled = true;
+    const text = b.querySelector('span:last-child').textContent;
+    if (text === q.a) b.classList.add('correct');
+    else if (b === btn && !isCorrect) b.classList.add('wrong');
+    else b.classList.add('dim');
+  });
+  if (isCorrect) { score++; streak++; } else { wrong++; streak = 0; }
+  document.getElementById('streak-count').textContent = streak;
+  document.getElementById('stat-benar').textContent = score;
+  document.getElementById('stat-salah').textContent = wrong;
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback-box ' + (isCorrect ? 'correct' : 'wrong');
+  fb.innerHTML = '<div class="feedback-icon">' + (isCorrect ? 'Benar!' : 'Salah') + '</div>'
+    + (isCorrect ? '' : '<div>Jawaban yang benar: <strong>' + q.a + '</strong><br><br></div>')
+    + '<div>' + q.explain + '</div>';
+  fb.style.display = 'block';
+  if (current < questions.length - 1) {
+    document.getElementById('next-btn').style.display = 'block';
+  } else {
+    setTimeout(showScore, 1400);
+  }
+}
+
+function nextQ() { current++; showQ(); }
+
+function showScore() {
+  ['q-num','q-text','stats-row','streak-badge'].forEach(id => document.getElementById(id).style.display = 'none');
+  document.getElementById('opts').style.display = 'none';
+  document.getElementById('feedback').style.display = 'none';
+  document.getElementById('next-btn').style.display = 'none';
+  document.getElementById('prog-bar').style.width = '100%';
+  const pct = Math.round(score / questions.length * 100);
+  const msg = pct >= 90 ? 'Luar biasa! Kamu menguasai materi ini!'
+    : pct >= 75 ? 'Bagus sekali! Terus pertahankan!'
+    : pct >= 60 ? 'Cukup baik! Perlu sedikit latihan lagi.'
+    : 'Semangat! Pelajari kembali materi ini ya.';
+  const ss = document.getElementById('score-screen');
+  ss.innerHTML = `
+    <div class="score-circle">
+      <div class="score-num">${pct}%</div>
+      <div class="score-pct">Nilai</div>
+    </div>
+    <div class="score-title">${msg}</div>
+    <div class="score-desc">Kamu menjawab benar <strong>${score}</strong> dari <strong>${questions.length}</strong> soal.</div>
+    <div class="score-detail">
+      <span class="s-benar">✓ ${score} Benar</span>
+      <span class="s-salah">✗ ${wrong} Salah</span>
+    </div>
+    <button class="restart-btn" onclick="startQuiz()">Ulangi Kuis (soal diacak ulang)</button>
+  `;
+  ss.style.display = 'block';
+}
+
+startQuiz();
+</script>
+</body>
+</html>
